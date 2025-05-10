@@ -13,6 +13,7 @@ const portfolioItems = [
     tags: ['Web Development', 'Booking Engine', 'Hospitality', 'UI/UX Design', 'Responsive Design'],
     Icon: BedDouble,
     imageHint: 'hotel website booking',
+    projectUrl: 'https://hotelsiyathma.com/',
     delay: 0,
   },
   {
@@ -23,6 +24,7 @@ const portfolioItems = [
     tags: ['AI', 'Web App', 'Skincare', 'UI Concept', 'Frontend', 'Vercel'],
     Icon: ScanFace,
     imageHint: 'skincare app ai',
+    projectUrl: 'https://v0-derm-care.vercel.app/',
     delay: 1,
   },
   {
