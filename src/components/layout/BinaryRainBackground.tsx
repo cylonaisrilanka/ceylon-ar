@@ -34,10 +34,24 @@ const FORMULA_CHARACTERS = [
   'ReLU(x)',      // ReLU activation
   'tanh(x)',      // Tanh activation
 ];
-const ALL_CHARACTERS = [...BASE_CHARACTERS, ...BASE_CHARACTERS, ...BASE_CHARACTERS, ...FORMULA_CHARACTERS]; // Skew towards more binary digits
 
-const MIN_SPEED = 0.42; 
-const MAX_SPEED = 1.8;  
+// To achieve approximately 80% binary and 20% formulas:
+// BASE_CHARACTERS has 2 elements. FORMULA_CHARACTERS has 16 elements.
+// We want (num_binary_elements) / (num_formula_elements) = 80 / 20 = 4.
+// Let r_b be repetitions of BASE_CHARACTERS and r_f be repetitions of FORMULA_CHARACTERS.
+// (r_b * 2) / (r_f * 16) = 4
+// 2 * r_b = 64 * r_f
+// r_b = 32 * r_f
+// Smallest integers: r_f = 1, r_b = 32.
+// So, repeat BASE_CHARACTERS 32 times and FORMULA_CHARACTERS 1 time.
+const ALL_CHARACTERS = [
+  ...Array(32).fill(null).flatMap(() => BASE_CHARACTERS), 
+  ...FORMULA_CHARACTERS
+]; // Approx. 80% binary (64 items), 20% formulas (16 items)
+
+
+const MIN_SPEED = 0.252; // Reduced by 40% from 0.42
+const MAX_SPEED = 1.08;  // Reduced by 40% from 1.8
 const MIN_FONT_SIZE = 12; 
 const MAX_FONT_SIZE = 24; 
 const PARTICLES_DENSITY_FACTOR = 60; 
@@ -121,7 +135,8 @@ const BinaryRainBackground = () => {
       return;
     }
 
-    const numParticles = Math.floor((dimensions.width / PARTICLES_DENSITY_FACTOR) * (dimensions.height / PARTICLES_DENSITY_FACTOR) * (PARTICLES_DENSITY_FACTOR / 10));
+    // Adjusted numParticles to be 50% of original calculation
+    const numParticles = Math.floor((dimensions.width / PARTICLES_DENSITY_FACTOR) * (dimensions.height / PARTICLES_DENSITY_FACTOR) * (PARTICLES_DENSITY_FACTOR / 10) * 0.5);
     
     setParticles(prevParticles => {
         const updatedParticles = Array(numParticles).fill(null).map((_, i) => {
@@ -184,7 +199,7 @@ const BinaryRainBackground = () => {
             fontSize: `${p.fontSize}px`,
             fontFamily: 'monospace', 
             textShadow: `0 0 5px ${p.color}, 0 0 10px ${p.color.replace('hsl(', 'hsla(').replace(')', ', 0.6)')}`, 
-            opacity: 0.3, 
+            opacity: 0.3, // Opacity set to 30%
             userSelect: 'none',
             whiteSpace: 'nowrap', // Prevent formulas from wrapping
           } as CSSProperties}
