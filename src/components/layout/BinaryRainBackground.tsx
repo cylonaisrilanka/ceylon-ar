@@ -15,11 +15,11 @@ interface Particle {
 }
 
 const CHARACTERS = ['0', '1'];
-const MIN_SPEED = 0.7; 
-const MAX_SPEED = 3.0; 
+const MIN_SPEED = 0.42; // Reduced from 0.7 (0.7 * 0.6 = 0.42)
+const MAX_SPEED = 1.8;  // Reduced from 3.0 (3.0 * 0.6 = 1.8)
 const MIN_FONT_SIZE = 12; 
 const MAX_FONT_SIZE = 24; 
-const PARTICLES_DENSITY_FACTOR = 60; // Increased from 30 to reduce quantity by ~50%
+const PARTICLES_DENSITY_FACTOR = 60; 
 
 const BinaryRainBackground = () => {
   const [particles, setParticles] = useState<Particle[]>([]);
