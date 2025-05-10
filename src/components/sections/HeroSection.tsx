@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Section from '@/components/ui/Section';
 import Link from 'next/link';
-import { ArrowDown } from 'lucide-react';
+import { ArrowDown, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export default function HeroSection() {
@@ -16,47 +16,55 @@ export default function HeroSection() {
     return () => clearTimeout(timer);
   }, []);
   
-  const animationDelay = (index: number) => ({ transitionDelay: `${150 * index}ms` });
+  const animationDelay = (index: number) => ({ transitionDelay: `${200 * index}ms` });
 
   return (
-    <Section className="bg-gradient-to-br from-primary to-background min-h-[calc(100vh-88px)] flex items-center" id="hero">
-      <div className="grid md:grid-cols-2 gap-12 items-center">
-        <div className="space-y-6 text-center md:text-left">
+    <Section className="bg-gradient-to-br from-background via-primary/10 to-background min-h-[calc(100vh-88px)] flex items-center relative overflow-hidden" id="hero">
+       <div className="absolute inset-0 opacity-5">
+        {/* Subtle background pattern or animation could go here if desired */}
+       </div>
+      <div className="grid md:grid-cols-2 gap-12 items-center z-10">
+        <div className="space-y-8 text-center md:text-left">
           <h1
-            className={cn("text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground load-animated-item", isLoaded && "is-loaded")}
+            className={cn("text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter text-foreground load-animated-item", isLoaded && "is-loaded")}
             style={animationDelay(0)}
           >
-            Innovate. Create. <span className="text-accent">Elevate.</span>
+            CEYLONAR<span className="text-accent">.</span>
+            <br />
+            Future<span className="text-primary">.</span> Redefined<span className="text-accent">.</span>
           </h1>
           <p 
-            className={cn("text-lg md:text-xl text-muted-foreground load-animated-item", isLoaded && "is-loaded")}
+            className={cn("text-xl md:text-2xl text-muted-foreground load-animated-item leading-relaxed", isLoaded && "is-loaded")}
             style={animationDelay(1)}
           >
-            Ceylonar Digital Portfolio: Showcasing cutting-edge Machine Learning and bespoke Software Solutions designed for impact and efficiency.
+            Pioneering breathtaking AI, Machine Learning, and bespoke Software Solutions. We craft digital experiences that captivate, innovate, and elevate your brand to new dimensions.
           </p>
           <div 
-            className={cn("space-x-4 pt-4 load-animated-item", isLoaded && "is-loaded")}
+            className={cn("pt-4 load-animated-item flex flex-col sm:flex-row gap-4 items-center justify-center md:justify-start", isLoaded && "is-loaded")}
             style={animationDelay(2)}
           >
-            <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-              <Link href="#portfolio">View Our Work</Link>
+            <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/80 shadow-lg transform hover:scale-105 transition-transform duration-300 w-full sm:w-auto">
+              <Link href="#portfolio">
+                <Sparkles className="mr-2 h-5 w-5" /> Explore Our Universe
+              </Link>
             </Button>
-            <Button asChild size="lg" variant="outline">
-              <Link href="#contact">Get In Touch</Link>
+            <Button asChild size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/10 hover:text-accent shadow-md transform hover:scale-105 transition-transform duration-300 w-full sm:w-auto">
+              <Link href="#contact">Connect With Us</Link>
             </Button>
           </div>
         </div>
         <div 
-          className={cn("relative aspect-square max-w-md mx-auto md:max-w-none load-animated-item", isLoaded && "is-loaded")}
+          className={cn("relative aspect-square max-w-md mx-auto md:max-w-none load-animated-item group", isLoaded && "is-loaded")}
           style={animationDelay(3)}
         >
+          <div className="absolute inset-0 bg-gradient-to-br from-primary to-accent rounded-xl shadow-2xl opacity-30 group-hover:opacity-50 transition-opacity duration-500 blur-xl group-hover:blur-2xl animate-pulse"></div>
           <Image
-            src="https://picsum.photos/600/600?random=1"
-            alt="Ceylonar Digital Innovation"
+            src="https://picsum.photos/700/700?random=1"
+            alt="CEYLONAR Digital Innovation Sphere"
             layout="fill"
             objectFit="cover"
-            className="rounded-xl shadow-2xl"
-            data-ai-hint="abstract technology"
+            className="rounded-xl shadow-2xl transform group-hover:scale-105 transition-transform duration-500"
+            data-ai-hint="futuristic technology sphere"
             priority
           />
         </div>
@@ -66,7 +74,7 @@ export default function HeroSection() {
         style={animationDelay(4)}
       >
         <Link href="#services" aria-label="Scroll to services">
-          <ArrowDown className="w-8 h-8 text-accent animate-bounce" />
+          <ArrowDown className="w-10 h-10 text-accent animate-bounce" />
         </Link>
       </div>
     </Section>

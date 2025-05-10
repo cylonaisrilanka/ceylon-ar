@@ -1,47 +1,47 @@
 import Section from '@/components/ui/Section';
 import PortfolioCard from '@/components/PortfolioCard';
-import { Brain, Code2 } from 'lucide-react';
+import { Brain, Code2, DatabaseZap, Smartphone } from 'lucide-react'; // Changed icons for variety
 import ScrollAnimationWrapper from '@/components/ScrollAnimationWrapper';
 
 const portfolioItems = [
   {
-    title: 'AI-Powered Recommendation Engine',
-    description: 'Developed a sophisticated recommendation system for an e-commerce platform, significantly boosting user engagement and sales through personalized product suggestions.',
+    title: 'AI-Powered Recommendation Engine for E-commerce Site',
+    description: "Engineered and seamlessly integrated a sophisticated AI recommendation system into a high-traffic e-commerce website. This ML model analyzes user behavior in real-time to deliver hyper-personalized product suggestions, significantly boosting user engagement, conversion rates, and average order value through an enhanced online shopping experience.",
     imageUrl: 'https://picsum.photos/800/600?random=2',
-    imageAlt: 'AI Recommendation Engine',
-    tags: ['Machine Learning', 'Python', 'Personalization', 'E-commerce'],
+    imageAlt: 'AI Recommendation Engine on E-commerce Site',
+    tags: ['Machine Learning', 'Python', 'E-commerce UI', 'Personalization', 'Web AI'],
     Icon: Brain,
-    imageHint: 'data analytics dashboard',
+    imageHint: 'ai website analytics',
     delay: 0,
   },
   {
-    title: 'Enterprise Resource Planning (ERP) System',
-    description: 'Designed and implemented a comprehensive ERP system for a manufacturing client, streamlining operations, inventory management, and financial reporting.',
+    title: 'Enterprise Web Portal & ERP Integration',
+    description: "Designed and implemented a comprehensive enterprise web portal, deeply integrated with a custom ERP system for a manufacturing client. This solution provided a unified interface for operations, inventory management, and financial reporting, accessible securely via the web, streamlining workflows and improving data visibility across the organization.",
     imageUrl: 'https://picsum.photos/800/600?random=3',
-    imageAlt: 'ERP System',
-    tags: ['Software Development', 'Java', 'Spring Boot', 'Cloud', 'SaaS'],
+    imageAlt: 'Enterprise Web Portal with ERP Integration',
+    tags: ['Web Development', 'Java', 'API Integration', 'Cloud SaaS', 'UI/UX Design'],
     Icon: Code2,
-    imageHint: 'software interface mockups',
+    imageHint: 'enterprise dashboard interface',
     delay: 1,
   },
   {
-    title: 'Predictive Maintenance for Industrial IoT',
-    description: 'Built an ML model to predict equipment failures in an industrial setting, reducing downtime and maintenance costs by enabling proactive interventions.',
+    title: 'Industrial IoT Web Monitoring Platform',
+    description: "Developed a real-time web monitoring platform for Industrial IoT devices, powered by an ML model predicting equipment failures. The intuitive web interface visualizes sensor data, alerts, and maintenance schedules, reducing downtime and operational costs by enabling proactive interventions through accessible online dashboards.",
     imageUrl: 'https://picsum.photos/800/600?random=4',
-    imageAlt: 'Predictive Maintenance IoT',
-    tags: ['Machine Learning', 'IoT', 'Predictive Analytics', 'Python'],
-    Icon: Brain,
-    imageHint: 'industrial machinery sensor',
+    imageAlt: 'Predictive Maintenance IoT Web Platform',
+    tags: ['Machine Learning', 'IoT Web', 'Predictive Analytics', 'Data Visualization', 'Python'],
+    Icon: DatabaseZap, // Changed from Brain for variety
+    imageHint: 'iot dashboard charts',
     delay: 2,
   },
   {
-    title: 'Cross-Platform Mobile Application',
-    description: 'Created a sleek and intuitive mobile application for a lifestyle brand, available on both iOS and Android, enhancing customer reach and interaction.',
+    title: 'Interactive Lifestyle Brand Website & Mobile App',
+    description: "Crafted a visually stunning and highly interactive website alongside a companion cross-platform mobile application for a dynamic lifestyle brand. The project focused on exceptional UI/UX design, engaging content delivery, and seamless user journeys to enhance customer reach, brand loyalty, and online interaction across all digital touchpoints.",
     imageUrl: 'https://picsum.photos/800/600?random=5',
-    imageAlt: 'Mobile Application',
-    tags: ['Software Development', 'React Native', 'Mobile App', 'UX/UI'],
-    Icon: Code2,
-    imageHint: 'mobile app interface',
+    imageAlt: 'Lifestyle Brand Website and Mobile App',
+    tags: ['Web Design', 'React', 'Mobile App', 'UX/UI Strategy', 'Branding'],
+    Icon: Smartphone, // Changed from Code2
+    imageHint: 'modern website design app',
     delay: 3,
   },
 ];
@@ -50,14 +50,14 @@ export default function PortfolioSection() {
   return (
     <Section id="portfolio" className="bg-background">
       <ScrollAnimationWrapper>
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-foreground">
-          Our <span className="text-accent">Portfolio</span>
+        <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-6 text-foreground">
+          Our Signature <span className="text-accent">Creations</span>
         </h2>
-        <p className="text-lg text-muted-foreground text-center mb-12 max-w-3xl mx-auto">
-          Explore a selection of our projects that demonstrate our expertise in transforming ideas into powerful digital solutions.
+        <p className="text-xl text-muted-foreground text-center mb-16 max-w-4xl mx-auto leading-relaxed">
+          Explore a galaxy of our projects, each a testament to our prowess in transforming visionary ideas into powerful, mind-bending digital solutions.
         </p>
       </ScrollAnimationWrapper>
-      <div className="grid md:grid-cols-2 gap-8">
+      <div className="grid md:grid-cols-2 gap-10">
         {portfolioItems.map((item) => (
           <ScrollAnimationWrapper key={item.title} style={{ transitionDelay: `${item.delay * 150}ms` }}>
             <PortfolioCard {...item} />

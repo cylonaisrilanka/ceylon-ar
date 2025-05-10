@@ -11,8 +11,8 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: 'Ceylonar Digital Portfolio',
-  description: 'Showcasing Machine Learning and Software Solutions Expertise',
+  title: 'CEYLONAR - AI & Software Solutions',
+  description: 'CEYLONAR: Pioneering AI, Machine Learning, and Bespoke Software Solutions. Discover our portfolio of innovative web designs and digital transformations.',
 };
 
 export default function RootLayout({
