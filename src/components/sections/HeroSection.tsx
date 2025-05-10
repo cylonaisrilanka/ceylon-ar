@@ -1,12 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Section from '@/components/ui/Section';
 import Link from 'next/link';
 import { ArrowDown, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import HeroGraphic from '@/components/graphics/HeroGraphic'; // Import the new graphic component
 
 export default function HeroSection() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -57,15 +57,8 @@ export default function HeroSection() {
           style={animationDelay(3)}
         >
           <div className="absolute inset-0 bg-gradient-to-br from-primary to-accent rounded-xl shadow-2xl opacity-30 group-hover:opacity-50 transition-opacity duration-500 blur-xl group-hover:blur-2xl animate-pulse"></div>
-          <Image
-            src="https://picsum.photos/700/700?random=1"
-            alt="CEYLONAR Digital Innovation Sphere"
-            layout="fill"
-            objectFit="cover"
-            className="rounded-xl shadow-2xl transform group-hover:scale-105 transition-transform duration-500"
-            data-ai-hint="futuristic technology sphere"
-            priority
-          />
+          {/* Replace next/image with HeroGraphic */}
+          <HeroGraphic className="relative z-10 rounded-xl shadow-2xl transform group-hover:scale-105 transition-transform duration-500" />
         </div>
       </div>
       <div 
