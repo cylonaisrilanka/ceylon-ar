@@ -163,7 +163,7 @@ const BinaryRainBackground = () => {
             fontSize: `${p.fontSize}px`,
             fontFamily: 'monospace', 
             textShadow: `0 0 5px ${p.color}, 0 0 10px ${p.color.replace('hsl(', 'hsla(').replace(')', ', 0.6)')}`, 
-            opacity: 0.5, // Set opacity to 50%
+            opacity: 0.3, // Set opacity to 30%
             userSelect: 'none',
           } as CSSProperties}
         >
