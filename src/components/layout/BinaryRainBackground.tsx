@@ -15,11 +15,11 @@ interface Particle {
 }
 
 const CHARACTERS = ['0', '1'];
-const MIN_SPEED = 0.5;
-const MAX_SPEED = 2.5; 
-const MIN_FONT_SIZE = 10;
-const MAX_FONT_SIZE = 22; 
-const PARTICLES_DENSITY_FACTOR = 25; 
+const MIN_SPEED = 0.7; // Slightly faster min
+const MAX_SPEED = 3.0; // Slightly faster max
+const MIN_FONT_SIZE = 12; // Slightly larger min
+const MAX_FONT_SIZE = 24; // Slightly larger max
+const PARTICLES_DENSITY_FACTOR = 30; // Increased density
 
 const BinaryRainBackground = () => {
   const [particles, setParticles] = useState<Particle[]>([]);
@@ -36,6 +36,8 @@ const BinaryRainBackground = () => {
       const mutedForegroundColor = computedStyle.getPropertyValue('--muted-foreground').trim();
       const chart1Color = computedStyle.getPropertyValue('--chart-1').trim();
       const chart2Color = computedStyle.getPropertyValue('--chart-2').trim();
+      const chart3Color = computedStyle.getPropertyValue('--chart-3').trim();
+      const chart4Color = computedStyle.getPropertyValue('--chart-4').trim();
       
       const formatHSL = (hslString: string) => `hsl(${hslString})`;
       const formatHSLA = (hslString: string, alpha: number) => `hsla(${hslString}, ${alpha})`;
@@ -43,12 +45,14 @@ const BinaryRainBackground = () => {
       setThemeColors([
         formatHSL(primaryColor),             // Solid Purple
         formatHSL(accentColor),              // Solid Pink
-        formatHSLA(mutedForegroundColor, 0.7),// Muted Gray with Alpha (good for contrast)
-        formatHSLA(primaryColor, 0.5),       // Purple with Alpha (more subtle)
-        formatHSLA(accentColor, 0.5),        // Pink with Alpha (more subtle)
-        formatHSLA(foregroundColor, 0.25),   // Very faint white/foreground particles (low alpha)
+        formatHSLA(mutedForegroundColor, 0.7),// Muted Gray with Alpha
+        formatHSLA(primaryColor, 0.6),       // Purple with Alpha
+        formatHSLA(accentColor, 0.6),        // Pink with Alpha
+        formatHSLA(foregroundColor, 0.3),   // Faint white/foreground particles
         formatHSL(chart1Color),              // Bright Cyan
-        formatHSLA(chart2Color, 0.6),        // Bright Green with Alpha
+        formatHSL(chart2Color),              // Bright Green
+        formatHSLA(chart3Color, 0.7),        // Bright Yellow/Orange with Alpha
+        formatHSLA(chart4Color, 0.8),        // Bright Lavender with Alpha
       ]);
     }
   }, []);
@@ -57,11 +61,11 @@ const BinaryRainBackground = () => {
     const char = CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)];
     const color = themeColors.length > 0 ? themeColors[Math.floor(Math.random() * themeColors.length)] : `hsl(var(--foreground))`;
     const speed = Math.random() * (MAX_SPEED - MIN_SPEED) + MIN_SPEED;
-    const fontSize = Math.random() * (MAX_FONT_SIZE - MIN_FONT_SIZE) + MIN_FONT_SIZE;
+    const fontSize = Math.floor(Math.random() * (MAX_FONT_SIZE - MIN_FONT_SIZE + 1)) + MIN_FONT_SIZE;
     return {
       id,
       x: Math.random() * currentWidth,
-      y: Math.random() * currentHeight, 
+      y: Math.random() * currentHeight - currentHeight, // Start some off-screen from top
       char,
       color,
       speed,
@@ -73,11 +77,11 @@ const BinaryRainBackground = () => {
     const char = CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)];
     const color = themeColors.length > 0 ? themeColors[Math.floor(Math.random() * themeColors.length)] : `hsl(var(--foreground))`;
     const speed = Math.random() * (MAX_SPEED - MIN_SPEED) + MIN_SPEED;
-    const fontSize = Math.random() * (MAX_FONT_SIZE - MIN_FONT_SIZE) + MIN_FONT_SIZE;
+    const fontSize = Math.floor(Math.random() * (MAX_FONT_SIZE - MIN_FONT_SIZE + 1)) + MIN_FONT_SIZE;
     return {
       ...particle,
       x: Math.random() * currentWidth,
-      y: -fontSize, 
+      y: -fontSize * 2, // Reset further above the screen
       char,
       color,
       speed,
@@ -105,18 +109,18 @@ const BinaryRainBackground = () => {
       return;
     }
 
-    const numParticles = Math.floor((dimensions.width * dimensions.height / 10000) * PARTICLES_DENSITY_FACTOR);
+    const numParticles = Math.floor((dimensions.width / PARTICLES_DENSITY_FACTOR) * (dimensions.height / PARTICLES_DENSITY_FACTOR) * (PARTICLES_DENSITY_FACTOR / 10)); // Adjusted calculation for density
     
     setParticles(prevParticles => {
         const updatedParticles = Array(numParticles).fill(null).map((_, i) => {
             const existingParticle = prevParticles.find(p => p.id === i);
             if (existingParticle) {
-                if (existingParticle.x > dimensions.width || existingParticle.y > dimensions.height + MAX_FONT_SIZE) {
-                    return resetParticle(existingParticle, dimensions.width, dimensions.height);
+                // Check if particle is out of bounds for re-initialization, to avoid sudden disappearance on resize
+                if (existingParticle.x > dimensions.width || existingParticle.x < 0) {
+                    return createParticle(i, dimensions.width, dimensions.height); // Recreate if x is out of bounds
                 }
                 return { 
                     ...existingParticle,
-                    x: Math.min(existingParticle.x, dimensions.width - MAX_FONT_SIZE),
                  };
             }
             return createParticle(i, dimensions.width, dimensions.height);
@@ -135,7 +139,7 @@ const BinaryRainBackground = () => {
       setParticles(currentParticles =>
         currentParticles.map(p => {
           let newY = p.y + p.speed;
-          if (newY > dimensions.height + p.fontSize) { 
+          if (newY > dimensions.height + p.fontSize * 2) { // Ensure it's well off screen before reset
             return resetParticle(p, dimensions.width, dimensions.height);
           }
           return { ...p, y: newY };
@@ -168,8 +172,8 @@ const BinaryRainBackground = () => {
             color: p.color,
             fontSize: `${p.fontSize}px`,
             fontFamily: 'monospace', 
-            textShadow: `0 0 4px ${p.color}, 0 0 8px ${p.color.replace('hsl', 'hsla').replace(')', ', 0.5)')}`, // Enhanced glow
-            opacity: p.fontSize / MAX_FONT_SIZE * 0.5 + 0.3, // Opacity range: 0.3 to 0.8
+            textShadow: `0 0 5px ${p.color}, 0 0 10px ${p.color.replace('hsl(', 'hsla(').replace(')', ', 0.6)')}`, // Enhanced glow
+            opacity: p.fontSize / MAX_FONT_SIZE * 0.6 + 0.4, // Opacity range: 0.4 to 1.0 for more vividness
             userSelect: 'none',
           } as CSSProperties}
         >
