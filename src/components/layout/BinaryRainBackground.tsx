@@ -22,19 +22,19 @@ const ML_DL_LIBRARIES = [
 ];
 
 
-// To achieve approximately 80% binary and 20% library names:
+// To achieve approximately 90% binary and 10% library names:
 // BASE_CHARACTERS has 2 elements. ML_DL_LIBRARIES has 16 elements.
-// We want (num_binary_elements) / (num_library_elements) = 80 / 20 = 4.
+// We want (num_binary_elements) / (num_library_elements) = 90 / 10 = 9.
 // Let r_b be repetitions of BASE_CHARACTERS and r_l be repetitions of ML_DL_LIBRARIES.
-// (r_b * 2) / (r_l * 16) = 4
-// 2 * r_b = 64 * r_l
-// r_b = 32 * r_l
-// Smallest integers: r_l = 1, r_b = 32.
-// So, repeat BASE_CHARACTERS 32 times and ML_DL_LIBRARIES 1 time.
+// (r_b * 2) / (r_l * 16) = 9
+// 2 * r_b = 144 * r_l
+// r_b = 72 * r_l
+// Smallest integers: r_l = 1, r_b = 72.
+// So, repeat BASE_CHARACTERS 72 times and ML_DL_LIBRARIES 1 time.
 const ALL_CHARACTERS = [
-  ...Array(32).fill(null).flatMap(() => BASE_CHARACTERS), 
+  ...Array(72).fill(null).flatMap(() => BASE_CHARACTERS), 
   ...ML_DL_LIBRARIES
-]; // Approx. 80% binary (64 items), 20% library names (16 items)
+]; // Approx. 90% binary (144 items), 10% library names (16 items)
 
 
 const MIN_SPEED = 0.252; // Reduced by 40% from 0.42
