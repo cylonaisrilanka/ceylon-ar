@@ -26,12 +26,12 @@ const services = [
 
 export default function ServicesSection() {
   return (
-    <Section id="services" className="bg-secondary/40"> {/* Adjusted background transparency */}
+    <Section id="services" className="bg-secondary/40">
       <ScrollAnimationWrapper>
-        <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-6 text-foreground">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-6 text-foreground text-shadow-md">
           Our Core <span className="text-accent">Capabilities</span>
         </h2>
-        <p className="text-xl text-muted-foreground text-center mb-16 max-w-4xl mx-auto leading-relaxed">
+        <p className="text-xl text-muted-foreground text-center mb-16 max-w-4xl mx-auto leading-relaxed text-shadow">
           We fuse artistry with technology, empowering businesses with state-of-the-art digital solutions that drive profound innovation and achieve spectacular results.
         </p>
       </ScrollAnimationWrapper>
@@ -43,10 +43,10 @@ export default function ServicesSection() {
                 <div className="p-5 bg-primary/10 rounded-full mb-6 inline-block ring-4 ring-primary/20 group-hover:ring-accent/30 transition-all duration-300 animate-[pulse_4s_cubic-bezier(0.4,0,0.6,1)_infinite]">
                   <service.icon className="w-12 h-12 text-primary group-hover:text-accent transition-colors duration-300" />
                 </div>
-                <CardTitle className="text-3xl font-bold">{service.title}</CardTitle>
+                <CardTitle className="text-3xl font-bold text-shadow-md">{service.title}</CardTitle>
               </CardHeader>
               <CardContent className="pb-8">
-                <CardDescription className="text-muted-foreground text-center text-md leading-relaxed px-2">{service.description}</CardDescription>
+                <CardDescription className="text-muted-foreground text-center text-md leading-relaxed px-2 text-shadow">{service.description}</CardDescription>
               </CardContent>
             </Card>
           </ScrollAnimationWrapper>

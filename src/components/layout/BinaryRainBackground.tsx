@@ -15,11 +15,11 @@ interface Particle {
 }
 
 const CHARACTERS = ['0', '1'];
-const MIN_SPEED = 0.7; // Slightly faster min
-const MAX_SPEED = 3.0; // Slightly faster max
-const MIN_FONT_SIZE = 12; // Slightly larger min
-const MAX_FONT_SIZE = 24; // Slightly larger max
-const PARTICLES_DENSITY_FACTOR = 30; // Increased density
+const MIN_SPEED = 0.7; 
+const MAX_SPEED = 3.0; 
+const MIN_FONT_SIZE = 12; 
+const MAX_FONT_SIZE = 24; 
+const PARTICLES_DENSITY_FACTOR = 30; 
 
 const BinaryRainBackground = () => {
   const [particles, setParticles] = useState<Particle[]>([]);
@@ -30,29 +30,20 @@ const BinaryRainBackground = () => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const computedStyle = getComputedStyle(document.documentElement);
-      const primaryColor = computedStyle.getPropertyValue('--primary').trim();
-      const accentColor = computedStyle.getPropertyValue('--accent').trim();
-      const foregroundColor = computedStyle.getPropertyValue('--foreground').trim();
-      const mutedForegroundColor = computedStyle.getPropertyValue('--muted-foreground').trim();
-      const chart1Color = computedStyle.getPropertyValue('--chart-1').trim();
-      const chart2Color = computedStyle.getPropertyValue('--chart-2').trim();
-      const chart3Color = computedStyle.getPropertyValue('--chart-3').trim();
-      const chart4Color = computedStyle.getPropertyValue('--chart-4').trim();
+      const primaryHsl = computedStyle.getPropertyValue('--primary').trim();
+      const accentHsl = computedStyle.getPropertyValue('--accent').trim();
+      const foregroundHsl = computedStyle.getPropertyValue('--foreground').trim();
       
       const formatHSL = (hslString: string) => `hsl(${hslString})`;
       const formatHSLA = (hslString: string, alpha: number) => `hsla(${hslString}, ${alpha})`;
 
       setThemeColors([
-        formatHSL(primaryColor),             // Solid Purple
-        formatHSL(accentColor),              // Solid Pink
-        formatHSLA(mutedForegroundColor, 0.7),// Muted Gray with Alpha
-        formatHSLA(primaryColor, 0.6),       // Purple with Alpha
-        formatHSLA(accentColor, 0.6),        // Pink with Alpha
-        formatHSLA(foregroundColor, 0.3),   // Faint white/foreground particles
-        formatHSL(chart1Color),              // Bright Cyan
-        formatHSL(chart2Color),              // Bright Green
-        formatHSLA(chart3Color, 0.7),        // Bright Yellow/Orange with Alpha
-        formatHSLA(chart4Color, 0.8),        // Bright Lavender with Alpha
+        formatHSL(primaryHsl),              // Solid Primary (Purple)
+        formatHSL(accentHsl),               // Solid Accent (Pink)
+        formatHSLA(foregroundHsl, 0.7),     // Semi-transparent Foreground (Off-white)
+        formatHSLA(primaryHsl, 0.5),        // Dimmed Primary (Purple)
+        formatHSLA(accentHsl, 0.5),         // Dimmed Accent (Pink)
+        formatHSLA(foregroundHsl, 0.3),     // More transparent Foreground for subtlety
       ]);
     }
   }, []);
@@ -65,7 +56,7 @@ const BinaryRainBackground = () => {
     return {
       id,
       x: Math.random() * currentWidth,
-      y: Math.random() * currentHeight - currentHeight, // Start some off-screen from top
+      y: Math.random() * currentHeight - currentHeight, 
       char,
       color,
       speed,
@@ -81,7 +72,7 @@ const BinaryRainBackground = () => {
     return {
       ...particle,
       x: Math.random() * currentWidth,
-      y: -fontSize * 2, // Reset further above the screen
+      y: -fontSize * 2, 
       char,
       color,
       speed,
@@ -109,15 +100,14 @@ const BinaryRainBackground = () => {
       return;
     }
 
-    const numParticles = Math.floor((dimensions.width / PARTICLES_DENSITY_FACTOR) * (dimensions.height / PARTICLES_DENSITY_FACTOR) * (PARTICLES_DENSITY_FACTOR / 10)); // Adjusted calculation for density
+    const numParticles = Math.floor((dimensions.width / PARTICLES_DENSITY_FACTOR) * (dimensions.height / PARTICLES_DENSITY_FACTOR) * (PARTICLES_DENSITY_FACTOR / 10));
     
     setParticles(prevParticles => {
         const updatedParticles = Array(numParticles).fill(null).map((_, i) => {
             const existingParticle = prevParticles.find(p => p.id === i);
             if (existingParticle) {
-                // Check if particle is out of bounds for re-initialization, to avoid sudden disappearance on resize
                 if (existingParticle.x > dimensions.width || existingParticle.x < 0) {
-                    return createParticle(i, dimensions.width, dimensions.height); // Recreate if x is out of bounds
+                    return createParticle(i, dimensions.width, dimensions.height);
                 }
                 return { 
                     ...existingParticle,
@@ -139,7 +129,7 @@ const BinaryRainBackground = () => {
       setParticles(currentParticles =>
         currentParticles.map(p => {
           let newY = p.y + p.speed;
-          if (newY > dimensions.height + p.fontSize * 2) { // Ensure it's well off screen before reset
+          if (newY > dimensions.height + p.fontSize * 2) { 
             return resetParticle(p, dimensions.width, dimensions.height);
           }
           return { ...p, y: newY };
@@ -172,8 +162,8 @@ const BinaryRainBackground = () => {
             color: p.color,
             fontSize: `${p.fontSize}px`,
             fontFamily: 'monospace', 
-            textShadow: `0 0 5px ${p.color}, 0 0 10px ${p.color.replace('hsl(', 'hsla(').replace(')', ', 0.6)')}`, // Enhanced glow
-            opacity: p.fontSize / MAX_FONT_SIZE * 0.6 + 0.4, // Opacity range: 0.4 to 1.0 for more vividness
+            textShadow: `0 0 5px ${p.color}, 0 0 10px ${p.color.replace('hsl(', 'hsla(').replace(')', ', 0.6)')}`, 
+            opacity: 0.5, // Set opacity to 50%
             userSelect: 'none',
           } as CSSProperties}
         >
@@ -185,3 +175,4 @@ const BinaryRainBackground = () => {
 };
 
 export default BinaryRainBackground;
+

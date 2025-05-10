@@ -1,6 +1,7 @@
+
 import Section from '@/components/ui/Section';
 import PortfolioCard from '@/components/PortfolioCard';
-import { Brain, Code2, DatabaseZap, Smartphone } from 'lucide-react'; // Changed icons for variety
+import { Brain, Code2, DatabaseZap, Smartphone } from 'lucide-react'; 
 import ScrollAnimationWrapper from '@/components/ScrollAnimationWrapper';
 
 const portfolioItems = [
@@ -30,7 +31,7 @@ const portfolioItems = [
     imageUrl: 'https://picsum.photos/800/600?random=4',
     imageAlt: 'Predictive Maintenance IoT Web Platform',
     tags: ['Machine Learning', 'IoT Web', 'Predictive Analytics', 'Data Visualization', 'Python'],
-    Icon: DatabaseZap, // Changed from Brain for variety
+    Icon: DatabaseZap, 
     imageHint: 'iot dashboard charts',
     delay: 2,
   },
@@ -40,7 +41,7 @@ const portfolioItems = [
     imageUrl: 'https://picsum.photos/800/600?random=5',
     imageAlt: 'Lifestyle Brand Website and Mobile App',
     tags: ['Web Design', 'React', 'Mobile App', 'UX/UI Strategy', 'Branding'],
-    Icon: Smartphone, // Changed from Code2
+    Icon: Smartphone, 
     imageHint: 'modern website design app',
     delay: 3,
   },
@@ -48,12 +49,12 @@ const portfolioItems = [
 
 export default function PortfolioSection() {
   return (
-    <Section id="portfolio" className="bg-transparent"> {/* Changed to bg-transparent */}
+    <Section id="portfolio" className="bg-transparent"> 
       <ScrollAnimationWrapper>
-        <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-6 text-foreground">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-6 text-foreground text-shadow-md">
           Our Signature <span className="text-accent">Creations</span>
         </h2>
-        <p className="text-xl text-muted-foreground text-center mb-16 max-w-4xl mx-auto leading-relaxed">
+        <p className="text-xl text-muted-foreground text-center mb-16 max-w-4xl mx-auto leading-relaxed text-shadow">
           Explore a galaxy of our projects, each a testament to our prowess in transforming visionary ideas into powerful, mind-bending digital solutions.
         </p>
       </ScrollAnimationWrapper>
@@ -67,3 +68,4 @@ export default function PortfolioSection() {
     </Section>
   );
 }
+

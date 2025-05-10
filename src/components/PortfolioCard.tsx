@@ -24,12 +24,12 @@ export default function PortfolioCard({ title, description, imageUrl, imageAlt, 
       <CardHeader className="pb-4 pt-6">
         <div className="flex items-center gap-3 mb-3">
           {Icon && <Icon className="w-10 h-10 text-accent group-hover:text-primary transition-colors duration-300" />}
-          <CardTitle className="text-2xl lg:text-3xl font-bold group-hover:text-primary transition-colors duration-300">{title}</CardTitle>
+          <CardTitle className="text-2xl lg:text-3xl font-bold group-hover:text-primary transition-colors duration-300 text-shadow-md">{title}</CardTitle>
         </div>
         {tags && tags.length > 0 && (
           <div className="flex flex-wrap gap-2">
             {tags.map((tag) => (
-              <Badge key={tag} variant="secondary" className="text-xs bg-secondary text-secondary-foreground group-hover:bg-primary/20 group-hover:text-primary transition-colors duration-300">
+              <Badge key={tag} variant="secondary" className="text-xs bg-secondary text-secondary-foreground group-hover:bg-primary/20 group-hover:text-primary transition-colors duration-300 text-shadow-none">
                 {tag}
               </Badge>
             ))}
@@ -48,7 +48,7 @@ export default function PortfolioCard({ title, description, imageUrl, imageAlt, 
           />
            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-50 group-hover:opacity-20 transition-opacity duration-300"></div>
         </div>
-        <CardDescription className="text-muted-foreground flex-grow text-base leading-relaxed">{description}</CardDescription>
+        <CardDescription className="text-muted-foreground flex-grow text-base leading-relaxed text-shadow">{description}</CardDescription>
       </CardContent>
     </Card>
   );

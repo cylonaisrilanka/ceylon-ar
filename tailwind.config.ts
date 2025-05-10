@@ -87,8 +87,28 @@ export default {
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out'
-  		}
+  		},
+      textShadow: {
+        DEFAULT: '0 1px 3px rgba(0,0,0,0.6)',
+        md: '0 2px 5px rgba(0,0,0,0.6)',
+        lg: '0 3px 7px rgba(0,0,0,0.6)',
+      }
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    function ({ addUtilities, theme }: { addUtilities: Function, theme: Function }) {
+      const newUtilities: Record<string, any> = {};
+      const textShadows = theme('textShadow');
+      if (textShadows) {
+        Object.entries(textShadows).forEach(([key, value]) => {
+          newUtilities[`.text-shadow${key === 'DEFAULT' ? '' : `-${key}`}`] = {
+            textShadow: value as string,
+          };
+        });
+        newUtilities['.text-shadow-none'] = { textShadow: 'none' };
+      }
+      addUtilities(newUtilities, ['responsive', 'hover']);
+    }
+  ],
 } satisfies Config;
