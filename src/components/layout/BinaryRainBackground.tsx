@@ -19,7 +19,7 @@ const MIN_SPEED = 0.7;
 const MAX_SPEED = 3.0; 
 const MIN_FONT_SIZE = 12; 
 const MAX_FONT_SIZE = 24; 
-const PARTICLES_DENSITY_FACTOR = 30; 
+const PARTICLES_DENSITY_FACTOR = 60; // Increased from 30 to reduce quantity by ~50%
 
 const BinaryRainBackground = () => {
   const [particles, setParticles] = useState<Particle[]>([]);
