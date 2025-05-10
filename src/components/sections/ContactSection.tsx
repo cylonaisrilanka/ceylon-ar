@@ -1,3 +1,4 @@
+
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -62,8 +63,8 @@ export default function ContactSection() {
               <Mail className="w-8 h-8 text-accent mt-1 group-hover:text-primary transition-colors duration-300" />
               <div>
                 <h4 className="font-semibold text-xl text-foreground mb-1">Email Relay</h4>
-                <a href="mailto:info@ceylonar.digital" className="text-lg text-muted-foreground hover:text-accent transition-colors duration-300">
-                  info@ceylonar.digital
+                <a href="mailto:ceylonar.main@gmail.com" className="text-lg text-muted-foreground hover:text-accent transition-colors duration-300">
+                  ceylonar.main@gmail.com
                 </a>
               </div>
             </div>
@@ -71,8 +72,8 @@ export default function ContactSection() {
               <Phone className="w-8 h-8 text-accent mt-1 group-hover:text-primary transition-colors duration-300" />
               <div>
                 <h4 className="font-semibold text-xl text-foreground mb-1">Direct Comms</h4>
-                <a href="tel:+1234567890" className="text-lg text-muted-foreground hover:text-accent transition-colors duration-300">
-                  +1 (234) 567-890 {/* Placeholder */}
+                <a href="tel:+94740646427" className="text-lg text-muted-foreground hover:text-accent transition-colors duration-300">
+                  074 064 6427
                 </a>
               </div>
             </div>
@@ -80,7 +81,7 @@ export default function ContactSection() {
               <MapPin className="w-8 h-8 text-accent mt-1 group-hover:text-primary transition-colors duration-300" />
               <div>
                 <h4 className="font-semibold text-xl text-foreground mb-1">Our Nexus</h4>
-                <p className="text-lg text-muted-foreground">123 Innovation Drive, Future City, Earth 90210</p> {/* Placeholder */}
+                <p className="text-lg text-muted-foreground">Polonnaruwa, Sri Lanka</p>
               </div>
             </div>
         </ScrollAnimationWrapper>
