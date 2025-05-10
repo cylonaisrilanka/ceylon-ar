@@ -37,8 +37,8 @@ const ALL_CHARACTERS = [
 ]; // Approx. 90% binary (144 items), 10% library names (16 items)
 
 
-const MIN_SPEED = 0.252; // Reduced by 40% from 0.42
-const MAX_SPEED = 1.08;  // Reduced by 40% from 1.8
+const MIN_SPEED = 0.126; // Further reduced by 50% from 0.252
+const MAX_SPEED = 0.54;  // Further reduced by 50% from 1.08
 const MIN_FONT_SIZE = 12; 
 const MAX_FONT_SIZE = 24; 
 const PARTICLES_DENSITY_FACTOR = 60; 
