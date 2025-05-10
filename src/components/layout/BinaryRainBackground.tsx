@@ -14,9 +14,30 @@ interface Particle {
   fontSize: number;
 }
 
-const CHARACTERS = ['0', '1'];
-const MIN_SPEED = 0.42; // Reduced from 0.7 (0.7 * 0.6 = 0.42)
-const MAX_SPEED = 1.8;  // Reduced from 3.0 (3.0 * 0.6 = 1.8)
+const BASE_CHARACTERS = ['0', '1'];
+const FORMULA_CHARACTERS = [
+  'y=mx+c',       // Linear Regression
+  'σ(z)',         // Sigmoid function (symbolic)
+  '∫f(x)dx',      // Integral
+  '∂L/∂w',        // Partial derivative (backpropagation)
+  'μ = Σx/N',     // Mean
+  'P(A|B)',       // Conditional Probability
+  '∇J(θ)',        // Gradient
+  '∑xᵢ²',         // Sum of squares
+  'argmax L(θ)',  // Max Likelihood Estimation
+  'E[X]',         // Expected Value
+  'Var(X)',       // Variance
+  'Cov(X,Y)',     // Covariance
+  'H(X)',         // Entropy
+  'KL(P||Q)',     // KL Divergence
+  'MSE',          // Mean Squared Error
+  'ReLU(x)',      // ReLU activation
+  'tanh(x)',      // Tanh activation
+];
+const ALL_CHARACTERS = [...BASE_CHARACTERS, ...BASE_CHARACTERS, ...BASE_CHARACTERS, ...FORMULA_CHARACTERS]; // Skew towards more binary digits
+
+const MIN_SPEED = 0.42; 
+const MAX_SPEED = 1.8;  
 const MIN_FONT_SIZE = 12; 
 const MAX_FONT_SIZE = 24; 
 const PARTICLES_DENSITY_FACTOR = 60; 
@@ -49,7 +70,7 @@ const BinaryRainBackground = () => {
   }, []);
 
   const createParticle = useCallback((id: number, currentWidth: number, currentHeight: number): Particle => {
-    const char = CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)];
+    const char = ALL_CHARACTERS[Math.floor(Math.random() * ALL_CHARACTERS.length)];
     const color = themeColors.length > 0 ? themeColors[Math.floor(Math.random() * themeColors.length)] : `hsl(var(--foreground))`;
     const speed = Math.random() * (MAX_SPEED - MIN_SPEED) + MIN_SPEED;
     const fontSize = Math.floor(Math.random() * (MAX_FONT_SIZE - MIN_FONT_SIZE + 1)) + MIN_FONT_SIZE;
@@ -65,7 +86,7 @@ const BinaryRainBackground = () => {
   }, [themeColors]);
   
   const resetParticle = useCallback((particle: Particle, currentWidth: number, _currentHeight: number): Particle => {
-    const char = CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)];
+    const char = ALL_CHARACTERS[Math.floor(Math.random() * ALL_CHARACTERS.length)];
     const color = themeColors.length > 0 ? themeColors[Math.floor(Math.random() * themeColors.length)] : `hsl(var(--foreground))`;
     const speed = Math.random() * (MAX_SPEED - MIN_SPEED) + MIN_SPEED;
     const fontSize = Math.floor(Math.random() * (MAX_FONT_SIZE - MIN_FONT_SIZE + 1)) + MIN_FONT_SIZE;
@@ -163,8 +184,9 @@ const BinaryRainBackground = () => {
             fontSize: `${p.fontSize}px`,
             fontFamily: 'monospace', 
             textShadow: `0 0 5px ${p.color}, 0 0 10px ${p.color.replace('hsl(', 'hsla(').replace(')', ', 0.6)')}`, 
-            opacity: 0.3, // Set opacity to 30%
+            opacity: 0.3, 
             userSelect: 'none',
+            whiteSpace: 'nowrap', // Prevent formulas from wrapping
           } as CSSProperties}
         >
           {p.char}
