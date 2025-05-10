@@ -9,7 +9,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import Section from '@/components/ui/Section';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, MapPin, Send } from 'lucide-react'; // Removed Phone icon
 import { useToast } from '@/hooks/use-toast';
 import ScrollAnimationWrapper from '@/components/ScrollAnimationWrapper';
 
@@ -68,15 +68,7 @@ export default function ContactSection() {
                 </a>
               </div>
             </div>
-            <div className="flex items-start gap-5 group">
-              <Phone className="w-8 h-8 text-accent mt-1 group-hover:text-primary transition-colors duration-300" />
-              <div>
-                <h4 className="font-semibold text-xl text-foreground mb-1">Direct Comms</h4>
-                <a href="tel:+94740646427" className="text-lg text-muted-foreground hover:text-accent transition-colors duration-300">
-                  074 064 6427
-                </a>
-              </div>
-            </div>
+            {/* Removed Direct Comms / Phone section */}
             <div className="flex items-start gap-5 group">
               <MapPin className="w-8 h-8 text-accent mt-1 group-hover:text-primary transition-colors duration-300" />
               <div>
