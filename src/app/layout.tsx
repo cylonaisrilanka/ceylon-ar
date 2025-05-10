@@ -24,8 +24,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={montserrat.variable}>
-      <body className="font-sans antialiased bg-transparent"> {/* Made body transparent */}
-        <BinaryRainBackground /> {/* This is fixed, -z-10, so it's the true background */}
+      <body className="font-sans antialiased bg-background"> {/* Changed to bg-background */}
+        <BinaryRainBackground /> {/* This is fixed, -z-10, so it's the true background over body's bg-background */}
         <div className="relative z-1 flex flex-col min-h-screen"> {/* Content wrapper, z-1 to be above rain. Page content itself will manage its transparency. */}
           {children}
         </div>
