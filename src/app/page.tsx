@@ -1,3 +1,4 @@
+
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import HeroSection from '@/components/sections/HeroSection';
@@ -7,9 +8,9 @@ import ContactSection from '@/components/sections/ContactSection';
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen bg-background">
+    <div className="flex flex-col min-h-screen bg-transparent"> {/* Changed bg-background to bg-transparent as BinaryRainBackground handles it */}
       <Header />
-      <main className="flex-grow">
+      <main className="flex-grow relative z-0"> {/* Ensure main content is positioned correctly over background */}
         <HeroSection />
         <ServicesSection />
         <PortfolioSection />
@@ -19,3 +20,4 @@ export default function Home() {
     </div>
   );
 }
+
