@@ -24,9 +24,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={montserrat.variable}>
-      <body className="font-sans antialiased">
-        <BinaryRainBackground /> {/* This ensures the binary rain animation is the background */}
-        <div className="relative z-10"> {/* Ensure content is above the background */}
+      <body className="font-sans antialiased bg-transparent"> {/* Made body transparent */}
+        <BinaryRainBackground /> {/* This is fixed, -z-10, so it's the true background */}
+        <div className="relative z-1 flex flex-col min-h-screen"> {/* Content wrapper, z-1 to be above rain. Page content itself will manage its transparency. */}
           {children}
         </div>
         <Toaster />

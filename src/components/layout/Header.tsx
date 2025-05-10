@@ -3,7 +3,7 @@ import { Briefcase } from 'lucide-react'; // Using Briefcase as a placeholder, c
 
 export default function Header() {
   return (
-    <header className="py-6 px-4 md:px-8 sticky top-0 z-50 bg-background/90 backdrop-blur-lg shadow-lg">
+    <header className="py-6 px-4 md:px-8 sticky top-0 z-50 bg-background/80 backdrop-blur-md shadow-lg"> {/* Adjusted transparency and blur */}
       <div className="container mx-auto flex justify-between items-center">
         <Link href="/" className="flex items-center gap-3 group">
           {/* Consider an SVG logo here in the future if available */}

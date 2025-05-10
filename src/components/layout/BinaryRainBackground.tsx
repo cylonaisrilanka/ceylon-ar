@@ -16,10 +16,10 @@ interface Particle {
 
 const CHARACTERS = ['0', '1'];
 const MIN_SPEED = 0.5;
-const MAX_SPEED = 2.5; // Slightly increased max speed
+const MAX_SPEED = 2.5; 
 const MIN_FONT_SIZE = 10;
-const MAX_FONT_SIZE = 22; // Slightly increased max font size
-const PARTICLES_DENSITY_FACTOR = 25; // Particles per 10000 sq pixels, increased density
+const MAX_FONT_SIZE = 22; 
+const PARTICLES_DENSITY_FACTOR = 25; 
 
 const BinaryRainBackground = () => {
   const [particles, setParticles] = useState<Particle[]>([]);
@@ -28,23 +28,27 @@ const BinaryRainBackground = () => {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
-    // This effect runs once on mount to get theme colors
     if (typeof window !== 'undefined') {
       const computedStyle = getComputedStyle(document.documentElement);
       const primaryColor = computedStyle.getPropertyValue('--primary').trim();
       const accentColor = computedStyle.getPropertyValue('--accent').trim();
       const foregroundColor = computedStyle.getPropertyValue('--foreground').trim();
+      const mutedForegroundColor = computedStyle.getPropertyValue('--muted-foreground').trim();
+      const chart1Color = computedStyle.getPropertyValue('--chart-1').trim();
+      const chart2Color = computedStyle.getPropertyValue('--chart-2').trim();
       
-      // Ensure HSL values are correctly formatted for CSS
       const formatHSL = (hslString: string) => `hsl(${hslString})`;
       const formatHSLA = (hslString: string, alpha: number) => `hsla(${hslString}, ${alpha})`;
 
       setThemeColors([
-        formatHSL(primaryColor), 
-        formatHSL(accentColor),
-        formatHSLA(foregroundColor, 0.6), // Foreground with some transparency
-        formatHSLA(primaryColor, 0.7),   // Primary with some transparency
-        formatHSLA(accentColor, 0.7),    // Accent with some transparency
+        formatHSL(primaryColor),             // Solid Purple
+        formatHSL(accentColor),              // Solid Pink
+        formatHSLA(mutedForegroundColor, 0.7),// Muted Gray with Alpha (good for contrast)
+        formatHSLA(primaryColor, 0.5),       // Purple with Alpha (more subtle)
+        formatHSLA(accentColor, 0.5),        // Pink with Alpha (more subtle)
+        formatHSLA(foregroundColor, 0.25),   // Very faint white/foreground particles (low alpha)
+        formatHSL(chart1Color),              // Bright Cyan
+        formatHSLA(chart2Color, 0.6),        // Bright Green with Alpha
       ]);
     }
   }, []);
@@ -57,7 +61,7 @@ const BinaryRainBackground = () => {
     return {
       id,
       x: Math.random() * currentWidth,
-      y: Math.random() * currentHeight, // Start at random y for initial fill
+      y: Math.random() * currentHeight, 
       char,
       color,
       speed,
@@ -66,7 +70,6 @@ const BinaryRainBackground = () => {
   }, [themeColors]);
   
   const resetParticle = useCallback((particle: Particle, currentWidth: number, _currentHeight: number): Particle => {
-    // Re-randomize properties for a more dynamic effect on reset
     const char = CHARACTERS[Math.floor(Math.random() * CHARACTERS.length)];
     const color = themeColors.length > 0 ? themeColors[Math.floor(Math.random() * themeColors.length)] : `hsl(var(--foreground))`;
     const speed = Math.random() * (MAX_SPEED - MIN_SPEED) + MIN_SPEED;
@@ -74,7 +77,7 @@ const BinaryRainBackground = () => {
     return {
       ...particle,
       x: Math.random() * currentWidth,
-      y: -fontSize, // Reset above the screen
+      y: -fontSize, 
       char,
       color,
       speed,
@@ -83,7 +86,6 @@ const BinaryRainBackground = () => {
   }, [themeColors]);
 
   useEffect(() => {
-    // Handles window resize
     const updateDimensions = () => {
       const newWidth = window.innerWidth;
       const newHeight = window.innerHeight;
@@ -92,15 +94,14 @@ const BinaryRainBackground = () => {
       }
     };
 
-    updateDimensions(); // Initial dimensions
+    updateDimensions(); 
     window.addEventListener('resize', updateDimensions);
     return () => window.removeEventListener('resize', updateDimensions);
-  }, [dimensions.width, dimensions.height]); // Depend on width and height
+  }, [dimensions.width, dimensions.height]); 
   
   useEffect(() => {
-    // Initializes or updates particles when dimensions or theme colors change
     if (dimensions.width === 0 || dimensions.height === 0 || themeColors.length === 0) {
-      setParticles([]); // Clear particles if no dimensions/theme
+      setParticles([]); 
       return;
     }
 
@@ -110,25 +111,23 @@ const BinaryRainBackground = () => {
         const updatedParticles = Array(numParticles).fill(null).map((_, i) => {
             const existingParticle = prevParticles.find(p => p.id === i);
             if (existingParticle) {
-                // If particle exists, ensure it's within new bounds or reset if too far off
                 if (existingParticle.x > dimensions.width || existingParticle.y > dimensions.height + MAX_FONT_SIZE) {
                     return resetParticle(existingParticle, dimensions.width, dimensions.height);
                 }
-                return { // Keep existing particle but update its bounds if necessary
+                return { 
                     ...existingParticle,
                     x: Math.min(existingParticle.x, dimensions.width - MAX_FONT_SIZE),
                  };
             }
             return createParticle(i, dimensions.width, dimensions.height);
         });
-        return updatedParticles.slice(0, numParticles); // Ensure correct number of particles
+        return updatedParticles.slice(0, numParticles); 
     });
 
   }, [dimensions, themeColors, createParticle, resetParticle]);
 
 
   useEffect(() => {
-    // Animation loop
     if (particles.length === 0 || dimensions.width === 0 || dimensions.height === 0) return;
 
     let animationFrameId: number;
@@ -136,7 +135,7 @@ const BinaryRainBackground = () => {
       setParticles(currentParticles =>
         currentParticles.map(p => {
           let newY = p.y + p.speed;
-          if (newY > dimensions.height + p.fontSize) { // Particle is off-screen
+          if (newY > dimensions.height + p.fontSize) { 
             return resetParticle(p, dimensions.width, dimensions.height);
           }
           return { ...p, y: newY };
@@ -147,16 +146,15 @@ const BinaryRainBackground = () => {
 
     animationFrameId = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(animationFrameId);
-  }, [particles, dimensions, resetParticle]); // resetParticle is stable due to useCallback
+  }, [particles, dimensions, resetParticle]); 
 
-  // Avoid rendering if critical data isn't ready (prevents flash or errors)
   if (themeColors.length === 0 || dimensions.width === 0) {
     return null;
   }
 
   return (
     <div
-      ref={containerRef} // Ref might not be strictly needed if using window dimensions
+      ref={containerRef} 
       className="fixed inset-0 -z-10 overflow-hidden pointer-events-none"
       aria-hidden="true"
     >
@@ -169,9 +167,9 @@ const BinaryRainBackground = () => {
             top: `${p.y}px`,
             color: p.color,
             fontSize: `${p.fontSize}px`,
-            fontFamily: 'monospace', // Monospaced font for binary look
-            textShadow: `0 0 3px ${p.color}, 0 0 6px ${p.color}`, // Subtler glow
-            opacity: p.fontSize / MAX_FONT_SIZE * 0.6 + 0.3, // Opacity based on size, min 0.3 max 0.9
+            fontFamily: 'monospace', 
+            textShadow: `0 0 4px ${p.color}, 0 0 8px ${p.color.replace('hsl', 'hsla').replace(')', ', 0.5)')}`, // Enhanced glow
+            opacity: p.fontSize / MAX_FONT_SIZE * 0.5 + 0.3, // Opacity range: 0.3 to 0.8
             userSelect: 'none',
           } as CSSProperties}
         >

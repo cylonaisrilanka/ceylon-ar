@@ -8,9 +8,9 @@ import ContactSection from '@/components/sections/ContactSection';
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen bg-transparent"> {/* Changed bg-background to bg-transparent as BinaryRainBackground handles it */}
+    <div className="flex flex-col min-h-screen bg-transparent"> {/* Ensures this container is transparent over BinaryRainBackground */}
       <Header />
-      <main className="flex-grow relative z-0"> {/* Ensure main content is positioned correctly over background */}
+      <main className="flex-grow relative z-0"> {/* z-0 is fine as it's within the layout's z-1 context */}
         <HeroSection />
         <ServicesSection />
         <PortfolioSection />

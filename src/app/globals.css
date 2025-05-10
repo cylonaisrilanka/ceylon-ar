@@ -99,7 +99,8 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-background text-foreground;
+    /* Removed bg-background, will be applied as bg-transparent in layout.tsx */
+    @apply text-foreground;
     font-family: var(--font-montserrat), sans-serif; /* Ensures Montserrat is the base font */
   }
 }

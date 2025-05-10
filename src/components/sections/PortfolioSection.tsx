@@ -48,7 +48,7 @@ const portfolioItems = [
 
 export default function PortfolioSection() {
   return (
-    <Section id="portfolio" className="bg-background">
+    <Section id="portfolio" className="bg-transparent"> {/* Changed to bg-transparent */}
       <ScrollAnimationWrapper>
         <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-6 text-foreground">
           Our Signature <span className="text-accent">Creations</span>

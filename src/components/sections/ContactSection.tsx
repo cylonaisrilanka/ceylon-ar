@@ -13,7 +13,7 @@ export default function ContactSection() {
   const emailAddress = "ceylonar.main@gmail.com";
 
   return (
-    <Section id="contact" className="bg-card text-card-foreground">
+    <Section id="contact" className="bg-card/40 text-card-foreground"> {/* Adjusted background transparency */}
       <ScrollAnimationWrapper>
         <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-6">
           Let's Create <span className="text-accent">Magic</span>
@@ -25,7 +25,7 @@ export default function ContactSection() {
 
       <div className="flex justify-center mt-10">
         <ScrollAnimationWrapper className="w-full max-w-2xl" style={{ transitionDelay: `100ms` }}>
-          <div className="space-y-10 p-8 sm:p-10 bg-secondary rounded-2xl shadow-xl">
+          <div className="space-y-10 p-8 sm:p-10 bg-secondary rounded-2xl shadow-xl"> {/* This inner div provides solid background for text */}
             <h3 className="text-3xl font-bold text-foreground mb-8 text-center">Contact Coordinates</h3>
             
             <div className="flex items-start gap-5 group">

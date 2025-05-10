@@ -19,7 +19,7 @@ export default function HeroSection() {
   const animationDelay = (index: number) => ({ transitionDelay: `${200 * index}ms` });
 
   return (
-    <Section className="bg-gradient-to-br from-background via-primary/10 to-background min-h-[calc(100vh-88px)] flex items-center relative overflow-hidden" id="hero">
+    <Section className="bg-transparent min-h-[calc(100vh-88px)] flex items-center relative overflow-hidden" id="hero"> {/* Changed to bg-transparent */}
        <div className="absolute inset-0 opacity-5">
         {/* Subtle background pattern or animation could go here if desired */}
        </div>

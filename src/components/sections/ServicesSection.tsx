@@ -26,7 +26,7 @@ const services = [
 
 export default function ServicesSection() {
   return (
-    <Section id="services" className="bg-secondary">
+    <Section id="services" className="bg-secondary/40"> {/* Adjusted background transparency */}
       <ScrollAnimationWrapper>
         <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-6 text-foreground">
           Our Core <span className="text-accent">Capabilities</span>
