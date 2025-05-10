@@ -15,39 +15,26 @@ interface Particle {
 }
 
 const BASE_CHARACTERS = ['0', '1'];
-const FORMULA_CHARACTERS = [
-  'y=mx+c',       // Linear Regression
-  'σ(z)',         // Sigmoid function (symbolic)
-  '∫f(x)dx',      // Integral
-  '∂L/∂w',        // Partial derivative (backpropagation)
-  'μ = Σx/N',     // Mean
-  'P(A|B)',       // Conditional Probability
-  '∇J(θ)',        // Gradient
-  '∑xᵢ²',         // Sum of squares
-  'argmax L(θ)',  // Max Likelihood Estimation
-  'E[X]',         // Expected Value
-  'Var(X)',       // Variance
-  'Cov(X,Y)',     // Covariance
-  'H(X)',         // Entropy
-  'KL(P||Q)',     // KL Divergence
-  'MSE',          // Mean Squared Error
-  'ReLU(x)',      // ReLU activation
-  'tanh(x)',      // Tanh activation
+const ML_DL_LIBRARIES = [
+  'TensorFlow', 'PyTorch', 'scikit-learn', 'Keras', 'Pandas', 'NumPy',
+  'Matplotlib', 'Seaborn', 'OpenCV', 'NLTK', 'spaCy', 'XGBoost',
+  'LightGBM', 'JAX', 'Hugging Face', 'CUDA' 
 ];
 
-// To achieve approximately 80% binary and 20% formulas:
-// BASE_CHARACTERS has 2 elements. FORMULA_CHARACTERS has 16 elements.
-// We want (num_binary_elements) / (num_formula_elements) = 80 / 20 = 4.
-// Let r_b be repetitions of BASE_CHARACTERS and r_f be repetitions of FORMULA_CHARACTERS.
-// (r_b * 2) / (r_f * 16) = 4
-// 2 * r_b = 64 * r_f
-// r_b = 32 * r_f
-// Smallest integers: r_f = 1, r_b = 32.
-// So, repeat BASE_CHARACTERS 32 times and FORMULA_CHARACTERS 1 time.
+
+// To achieve approximately 80% binary and 20% library names:
+// BASE_CHARACTERS has 2 elements. ML_DL_LIBRARIES has 16 elements.
+// We want (num_binary_elements) / (num_library_elements) = 80 / 20 = 4.
+// Let r_b be repetitions of BASE_CHARACTERS and r_l be repetitions of ML_DL_LIBRARIES.
+// (r_b * 2) / (r_l * 16) = 4
+// 2 * r_b = 64 * r_l
+// r_b = 32 * r_l
+// Smallest integers: r_l = 1, r_b = 32.
+// So, repeat BASE_CHARACTERS 32 times and ML_DL_LIBRARIES 1 time.
 const ALL_CHARACTERS = [
   ...Array(32).fill(null).flatMap(() => BASE_CHARACTERS), 
-  ...FORMULA_CHARACTERS
-]; // Approx. 80% binary (64 items), 20% formulas (16 items)
+  ...ML_DL_LIBRARIES
+]; // Approx. 80% binary (64 items), 20% library names (16 items)
 
 
 const MIN_SPEED = 0.252; // Reduced by 40% from 0.42
@@ -201,7 +188,7 @@ const BinaryRainBackground = () => {
             textShadow: `0 0 5px ${p.color}, 0 0 10px ${p.color.replace('hsl(', 'hsla(').replace(')', ', 0.6)')}`, 
             opacity: 0.3, // Opacity set to 30%
             userSelect: 'none',
-            whiteSpace: 'nowrap', // Prevent formulas from wrapping
+            whiteSpace: 'nowrap', // Prevent library names from wrapping
           } as CSSProperties}
         >
           {p.char}
