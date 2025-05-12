@@ -1,12 +1,14 @@
+
 'use client';
 
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Section from '@/components/ui/Section';
-import Link from 'next/link';
+import Link from 'next/link'; // Keep for Explore and Connect buttons that don't need custom scroll
+import SmoothLink from '@/components/layout/SmoothLink'; // Import SmoothLink
 import { ArrowDown, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import HeroGraphic from '@/components/graphics/HeroGraphic'; // Import the new graphic component
+import HeroGraphic from '@/components/graphics/HeroGraphic';
 
 export default function HeroSection() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -43,12 +45,16 @@ export default function HeroSection() {
             style={animationDelay(2)}
           >
             <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/80 shadow-lg transform hover:scale-105 transition-transform duration-300 w-full sm:w-auto text-shadow-none">
-              <Link href="#portfolio">
+              {/* This Link uses SmoothLink */}
+              <SmoothLink hrefHash="#portfolio" targetId="portfolio" aria-label="Explore Our Universe">
                 <Sparkles className="mr-2 h-5 w-5" /> Explore Our Universe
-              </Link>
+              </SmoothLink>
             </Button>
             <Button asChild size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/10 hover:text-accent shadow-md transform hover:scale-105 transition-transform duration-300 w-full sm:w-auto text-shadow-none">
-              <Link href="#contact">Connect With Us</Link>
+              {/* This Link uses SmoothLink */}
+              <SmoothLink hrefHash="#contact" targetId="contact" aria-label="Connect With Us">
+                Connect With Us
+              </SmoothLink>
             </Button>
           </div>
         </div>
@@ -57,7 +63,6 @@ export default function HeroSection() {
           style={animationDelay(3)}
         >
           <div className="absolute inset-0 bg-gradient-to-br from-primary to-accent rounded-xl shadow-2xl opacity-30 group-hover:opacity-50 transition-opacity duration-500 blur-xl group-hover:blur-2xl animate-pulse"></div>
-          {/* Replace next/image with HeroGraphic */}
           <HeroGraphic className="relative z-10 rounded-xl shadow-2xl transform group-hover:scale-105 transition-transform duration-500" />
         </div>
       </div>
@@ -65,9 +70,10 @@ export default function HeroSection() {
         className={cn("absolute bottom-10 left-1/2 -translate-x-1/2 text-center load-animated-item", isLoaded && "is-loaded")}
         style={animationDelay(4)}
       >
-        <Link href="#services" aria-label="Scroll to services">
+        {/* This Link uses SmoothLink */}
+        <SmoothLink hrefHash="#services" targetId="services" aria-label="Scroll to services">
           <ArrowDown className="w-10 h-10 text-accent animate-bounce" />
-        </Link>
+        </SmoothLink>
       </div>
     </Section>
   );

@@ -1,6 +1,7 @@
 
 import Link from 'next/link';
 import { BrainCircuit } from 'lucide-react'; 
+import SmoothLink from './SmoothLink'; // Import the new SmoothLink component
 
 export default function Header() {
   return (
@@ -13,18 +14,32 @@ export default function Header() {
           </h1>
         </Link>
         <nav className="space-x-6">
-          <Link href="#services" className="text-lg text-muted-foreground hover:text-accent transition-colors duration-300 text-shadow">
+          <SmoothLink 
+            hrefHash="#services"
+            targetId="services"
+            className="text-lg text-muted-foreground hover:text-accent transition-colors duration-300 text-shadow"
+            aria-label="Scroll to Services section"
+          >
             Services
-          </Link>
-          <Link href="#portfolio" className="text-lg text-muted-foreground hover:text-accent transition-colors duration-300 text-shadow">
+          </SmoothLink>
+          <SmoothLink 
+            hrefHash="#portfolio"
+            targetId="portfolio"
+            className="text-lg text-muted-foreground hover:text-accent transition-colors duration-300 text-shadow"
+            aria-label="Scroll to Portfolio section"
+          >
             Portfolio
-          </Link>
-          <Link href="#contact" className="text-lg text-muted-foreground hover:text-accent transition-colors duration-300 text-shadow">
+          </SmoothLink>
+          <SmoothLink 
+            hrefHash="#contact"
+            targetId="contact"
+            className="text-lg text-muted-foreground hover:text-accent transition-colors duration-300 text-shadow"
+            aria-label="Scroll to Contact section"
+          >
             Contact
-          </Link>
+          </SmoothLink>
         </nav>
       </div>
     </header>
   );
 }
-

@@ -97,6 +97,7 @@
   }
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 88px; /* Adjust this value to match actual sticky header height */
   }
   body {
     /* Removed bg-background, will be applied as bg-transparent in layout.tsx */

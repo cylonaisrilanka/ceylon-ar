@@ -1,0 +1,14 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="ceylonarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:hsl(260, 70%, 55%); stop-opacity:1" /> {/* Primary Color */}
+      <stop offset="100%" style="stop-color:hsl(330, 100%, 60%); stop-opacity:1" /> {/* Accent Color */}
+    </linearGradient>
+  </defs>
+  {/* The main "C" shape */}
+  <path d="M36 12C36 7.58172 32.4183 4 28 4H20C15.5817 4 12 7.58172 12 12V18M12 36C12 40.4183 15.5817 44 20 44H28C32.4183 44 36 40.4183 36 36V30" stroke="url(#ceylonarGrad)" stroke-width="6" stroke-linecap="round"/>
+  {/* Central dot representing a node/AI element */}
+  <circle cx="24" cy="24" r="6" fill="hsl(330, 100%, 60%)"/> {/* Accent Color */}
+  {/* Line connecting to the dot, suggesting circuitry/connection */}
+  <path d="M24 24L16 24" stroke="hsl(260, 70%, 55%)" stroke-width="4" stroke-linecap="round"/> {/* Primary Color */}
+</svg>
